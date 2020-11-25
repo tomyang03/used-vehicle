@@ -11,5 +11,6 @@ Create the Used Vehicle Sale App to test using Selenium
 
 ## Youngyun's TO DO
 - Add detail validation
+- Add links to external (JD Power)
 - Change data in Local Storage into JSON format
 - (If needs) Print each error message below for each input
