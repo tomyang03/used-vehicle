@@ -1,0 +1,38 @@
+<!----------------------------------------------------------------------------------
+ SENG8040 Project - Manual Testing and Selenium Automation Testing
+ Used Vehicle Sale Web Application 
+ Professor: Firouzeh Sharifi Lotfabad
+ Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung 
+ ---------------------------------------------------------------------------------->
+
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title> &#128663; Display Entered Vehicle</title>
+		<link rel="stylesheet" type="text/css" href="../styles/main.css">
+		<script src="../javascript/main.js"></script>
+	</head>
+	<!--if the form submitted successfully, this page loads and calls 
+        DisplayEnteredVehicle() function to display info for the added vehicle -->
+	<body onload="DisplayEnteredVehicle()">
+		<h1>Used Vehicle Sale App</h1>
+		<fieldset id="formBorder">
+			<div class="buttons">		
+				<input type="button" class="navigationButtons" value="Home Page" 
+					id="homePageBtn" onclick="window.location.href='../Group2Home.html'" />	
+			<div class="buttons">
+			
+			<h3>Used-Vehicle Successfully Added &#128512;</h3>
+
+			<!-- <p> successOutputSpan is like a container to hold and display
+				the vehicle info just added by user -->
+			<p id="successOutputSpan"></p>	
+		</fieldset>
+		<footer>
+				<p class="footer"> 
+					 &#169; SENG8040, 2020. Used Vehicle Sale. <br> 
+					 Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung. 
+			 </p>
+		</footer>
+	</body>
+</html>

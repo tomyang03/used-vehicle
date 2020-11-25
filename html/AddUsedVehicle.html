@@ -1,0 +1,100 @@
+<!----------------------------------------------------------------------------------
+ SENG8040 Project - Manual Testing and Selenium Automation Testing
+ Used Vehicle Sale Web Application 
+ Professor: Firouzeh Sharifi Lotfabad
+ Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung 
+ ---------------------------------------------------------------------------------->
+
+ <html lang="en">
+	<head>
+	<title> &#128663; Add Used-Vehicle</title>
+	<link rel="stylesheet" type="text/css" href="../styles/main.css">
+	<script src="../javascript/main.js"></script>
+	</head>
+	<body>
+		<h1 id="title">Used Vehicle Sale App</h1>
+
+		<!--on submit, calls ValidateForm() function from main.js file-->
+		<form name="UsedVehicleForm" id="UsedVehicleForm"
+			action="../html/DisplayEnteredVehicle.html" onsubmit="return ValidateForm();" 
+			method="post">
+						
+		<!--onfocusout for all fields calls TrimWhiteSpaceAndLetterConversion() 
+			function from main.js: capitalize first letter for consistency, and
+			trim leading or trailing whitespaces for testing -->
+			<fieldset id="formBorder" onfocusout="TrimWhiteSpaceAndLetterConversion();">	 
+			
+				<div class="buttons">				
+					<input type="button" class="navigationBtns" value="Home Page" 
+						id="homePageBtn" onclick="window.location.href='../Group2Home.html'" />	
+				</div>
+						
+				<h3>Put a used car up for sale. All fields required</h3>   
+
+				<p>
+					<label>
+						Seller Name
+						<input type="text" name="sellerName" id="sellerName" maxlength="50">
+					</label>
+				</p>
+				<p>
+					<label>
+						Address
+						<input type="text" name="address" id="address" maxlength="50" placeholder="E.g. 15 Jane Street">
+					</label>
+				</p>
+				<p>
+					<label>
+						City
+						<input type="text" name="city" id="city" maxlength="50">
+					</label>
+				</p>
+				<p>
+					<label>
+						Phone Number
+						<input type="tel" name="phoneNumber" id="phoneNumber"placeholder="Format: 999-999-9999">
+					</label>
+				</p>
+				<p>
+					<label>
+						Email
+						<input type="text" name="email" id="email" placeholder="Format: Smith@mail.com">
+					</label>
+				</p>			
+				<p>
+					<label>
+						Vehicle Make
+						<input type="text" name="vehicleMake" id="vehicleMake" placeholder="E.g. Toyota, Acura, Lexus">
+					</label>
+				</p>
+				<p>
+					<label>
+						Vehicle Model
+						<input type="text" name="vehicleModel" id="vehicleModel" placeholder="E.g. Camry, MDX, ES 300">
+					</label>
+				</p>
+				<p>
+					<label>
+						Vehicle Year
+						<input type="number" name="vehicleYear" id="vehicleYear" placeholder="Year of Vehicle Model">
+					</label>
+				</p>										
+
+				<!--add JS function that appends all validation/error messages to 
+					<p> errorOutputSpan, which can be used for testing later-->
+				<p id="errorOutputSpan"></p>
+			
+				<div class="buttons">			
+					<input type="submit" name="submitBtn" id="submitBtn" value="Submit">
+				<div class="buttons">			
+			</fieldset>	
+		</form>
+
+    <footer>
+        <p class="footer"> 
+					&#169; SENG8040, 2020. Used Vehicle Sale. <br> 
+					Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung. 
+       </p>
+    </footer>
+	</body>
+ </html>

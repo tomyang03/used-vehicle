@@ -1,0 +1,38 @@
+<!----------------------------------------------------------------------------------
+ SENG8040 Project - Manual Testing and Selenium Automation Testing
+ Used Vehicle Sale Web Application 
+ Professor: Firouzeh Sharifi Lotfabad
+ Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung 
+ ---------------------------------------------------------------------------------->
+
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title> &#128663; Current Vehicle Listing</title>
+		<link rel="stylesheet" type="text/css" href="../styles/main.css">
+		<script src="../javascript/main.js"></script>
+	</head>
+    <!-- when this page loads, call DisplayVehicleList() function to display the
+        vehicleList from local storage -->
+	<body onload="DisplayVehicleList()">
+		<h1>Used Vehicle Sale App</h1>
+		<fieldset id="formBorder">
+			<div class="buttons">		
+				<input type="button" class="navigationButtons" value="Home Page" 
+					id="homePageBtn" onclick="window.location.href='../Group2Home.html'" />	
+			<div class="buttons">
+			<h3>Current Used-Vehicles for Sale &#128521;</h3>
+			<p id="vehicleList"></p>
+			<div class="buttons">			
+				<input type="button" name="clearListBtn" id="clearListBtn" 
+					value="Clear List" onclick="ClearLocalStorage();">
+			<div class="buttons">			
+		</fieldset>
+		<footer>
+				<p class="footer"> 
+					 &#169; SENG8040, 2020. Used Vehicle Sale. <br> 
+					 Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung. 
+			 </p>
+		</footer>
+	</body>
+</html>
