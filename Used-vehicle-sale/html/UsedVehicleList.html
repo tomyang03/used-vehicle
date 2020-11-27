@@ -10,29 +10,33 @@
 	<head>
 		<title> &#128663; Current Vehicle Listing</title>
 		<link rel="stylesheet" type="text/css" href="../styles/main.css">
-		<script src="../javascript/main.js"></script>
 	</head>
     <!-- when this page loads, call DisplayVehicleList() function to display the
         vehicleList from local storage -->
 	<body onload="DisplayVehicleList()">
 		<h1>Used Vehicle Sale App</h1>
+		
 		<fieldset id="formBorder">
 			<div class="buttons">		
 				<input type="button" class="navigationButtons" value="Home Page" 
 					id="homePageBtn" onclick="window.location.href='../Group2Home.html'" />	
-			<div class="buttons">
+			</div>
 			<h3>Current Used-Vehicles for Sale &#128521;</h3>
-			<p id="vehicleList"></p>
+			<section id="vehicleList"></section>
 			<div class="buttons">			
 				<input type="button" name="clearListBtn" id="clearListBtn" 
 					value="Clear List" onclick="ClearLocalStorage();">
-			<div class="buttons">			
+			</div>		
 		</fieldset>
+
 		<footer>
-				<p class="footer"> 
-					 &#169; SENG8040, 2020. Used Vehicle Sale. <br> 
-					 Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung. 
-			 </p>
+			<p class="footer"> 
+				&#169; SENG8040, 2020. Used Vehicle Sale.
+			</p>
+			<p class="footer"> 
+				Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung. 
+			</p>
 		</footer>
+		<script src="../javascript/main.js"></script>
 	</body>
 </html>

@@ -7,21 +7,22 @@
 
 /* ----------------------------------------------------------------------------------
 TODO: 
-    * Validate phone number, address, email formats
     * TrimWhiteSpaceAndLetterConversion()
-    * Find way to append correct jdpower hyperlink to each vehicle entry
     
 MAYBE:
     * Prevent duplicate entries? When all fields are the same as an exisiting entry
     * Find better way to validate vehicle year?
     * Confirm with user if they want to clear vehicle list?
-    * Set minimum character requirement for fields?
  ----------------------------------------------------------------------------------*/
+const vehicleList = document.getElementById("vehicleList");
+const enteredVehicle = document.getElementById("enteredVehicle");
+
+const VEHICLES_LS = "vehicles"; // Local storage key
+
 const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 const phoneNumberRegex = RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+let errorCount;
 
-let errorMessage = "";
-let enteredVehicle = "";
 
 // Form Validations --------------------------------------------------------------//
 function ValidateForm()
@@ -36,7 +37,7 @@ function ValidateForm()
 	const vehicleModel = document.getElementById("vehicleModel").value;
 	const vehicleYear = document.getElementById("vehicleYear").value;
 	
-	errorMessage = "";
+	errorCount = 0;
 	validateRequired(sellerName, "sellerName", "Seller Name");
 	validateRequired(userAddress, "address", "Address");
 	validateRequired(userCity, "city", "City");
@@ -45,30 +46,21 @@ function ValidateForm()
 	validateRequired(vehicleMake, "vehicleMake", "Vehicle Make");
 	validateRequired(vehicleModel, "vehicleModel", "Vehicle Model");
 	validateRequired(vehicleYear, "vehicleYear", "Vehicle Year");
-	
-	if (sellerName.length == 1)
-	{
-		errorMessage += "Enter full name.<br />";
-		document.getElementById("sellerName").focus();
-	}	
+
+	if (userPhoneNumber.length != 0 && !phoneNumberRegex.test(userPhoneNumber)) {
+		errorCount++;
+		document.getElementById("phoneNumber").classList.add("err-input");
+		document.getElementById("phoneNumberError").innerText = "Invalid phone number format";
+	}
+
+	if (userEmail.length != 0 && !emailRegex.test(userEmail)) {
+		errorCount++;
+		document.getElementById("email").classList.add("err-input");
+		document.getElementById("emailError").innerText = "Invalid email format";
+	}
+
+	/*
 	// TODO: Validate address format
-	if (userCity.length == 1)
-	{
-		errorMessage += "Invalid city.<br />";
-		document.getElementById("city").focus();
-	}
-	// TODO: Validate phone format
-	// TODO: Validate email format
-	if (vehicleMake.length == 1)
-	{
-		errorMessage += "Invalid vehicle make.<br />";
-		document.getElementById("vehicleMake").focus();
-	}	
-	if (vehicleModel.length == 1)
-	{
-		errorMessage += "Invalid vehicle model.<br />";
-		document.getElementById("vehicleModel").focus();
-	}
 	// MAYBE: Find better way to dynamically validate vehicle year?
 	if (vehicleYear.length != 0 && vehicleYear < 1990)
 	{
@@ -80,46 +72,29 @@ function ValidateForm()
 		errorMessage += "Vehicle model too new.<br />";
 		document.getElementById("vehicleYear").focus();
 	}	
+	*/
 	
-	if (errorMessage.length != 0)
-	{
-		document.getElementById("errorOutputSpan").innerHTML = errorMessage;
-		return false; // prevents form from submitting if there's errors
-    }
-    
-	if (errorMessage.length == 0)
-	{		
-		// TODO: append JD Power hyperlink to string
-		enteredVehicle += "<b>Seller: " + sellerName + "</b><br />" +
-			"Address: " + userAddress + "<br />" +
-			"City: " + userCity + "<br />" +
-			"Phone: " + userPhoneNumber + "<br />" +
-			"Email: " + userEmail + "<br />" +
-			"Vehicle: " + vehicleYear + " " + vehicleMake + " " + vehicleModel + 
-			"<br /><br />";
-    
-		// save submitted vehicle info to local storage item "successMessage",
-		// which is used by DisplayEnteredVehicle()
-		localStorage.setItem("successMessage", enteredVehicle);	
-        
-		// create var vehicleList to hold local 
-		// storage item "vehicleList" (if any)
-		let vehicleList = localStorage.getItem("vehicleList");
-        
-        // if var vehicleList IS empty
-		if (vehicleList == null)
-		{   
-			// add var enteredVehicle to local storage item "vehicleList"
-			localStorage.setItem("vehicleList", enteredVehicle);
+	console.log(`errorCount: ${errorCount}`)
+	if (errorCount === 0)
+	{	
+		const vehicleObj = {
+			sellerName,
+			userAddress,
+			userCity,
+			userPhoneNumber,
+			userEmail,
+			vehicleMake,
+			vehicleModel,
+			vehicleYear,
 		}
-		else
-		{
-			// if var vehicleList is NOT empty, first append var enteredVehicle 
-			// to var vehicleList, then replace local storage item "vehicleList"
-			// with the updated var vehicleList
-			vehicleList += enteredVehicle;
-			localStorage.setItem("vehicleList", vehicleList);			
+		let vehicles = JSON.parse(localStorage.getItem(VEHICLES_LS));
+		if (vehicles === null) {
+			vehicles = []
 		}
+		vehicles.push(vehicleObj);
+		localStorage.setItem(VEHICLES_LS, JSON.stringify(vehicles));
+	} else {
+		return false; 
 	}
 }
 
@@ -132,14 +107,22 @@ function TrimWhiteSpaceAndLetterConversion()
 
 function DisplayEnteredVehicle()
 {
-	document.getElementById("successOutputSpan").innerHTML = 
-		localStorage.getItem("successMessage");		
+	let vehicles_LS = JSON.parse(localStorage.getItem(VEHICLES_LS));
+	const lastVehicle = vehicles_LS[vehicles_LS.length - 1];
+	loadVehicle(lastVehicle, enteredVehicle);
 }
 
 function DisplayVehicleList()
 {
-	document.getElementById("vehicleList").innerHTML = 
-		localStorage.getItem("vehicleList");
+	const displayVehicles = localStorage.getItem(VEHICLES_LS);
+	if (displayVehicles !== null) {
+		const parsedVehicles = JSON.parse(displayVehicles);
+		parsedVehicles.forEach(function(vehicle) {
+			loadVehicle(vehicle, vehicleList);
+		})
+	} else {
+		vehicleList.innerText += "No used-vehicles yet.";
+	}
 }
 
 function ClearLocalStorage()
@@ -150,11 +133,42 @@ function ClearLocalStorage()
 }
 
 const validateRequired = (value, id, label) => {
-	if (value.length == 0) {
-		errorMessage += `${label} required.<br />`;
+	if (value.length === 0) {
+		errorCount++;
 		document.getElementById(id).classList.add("err-input");
-		return false;
+		document.getElementById(`${id}Error`).innerText = `${label} is required`;
+	} else if (value.length < 2) {
+		errorCount++;
+		document.getElementById(id).classList.add("err-input");
+		document.getElementById(`${id}Error`).innerText = "Invalid format (Minimum 2 characters required)";
 	} else {
 		document.getElementById(id).classList.remove("err-input");
+		document.getElementById(`${id}Error`).innerText = "";
 	}
+};
+
+const loadVehicle = (obj, ele) => {
+	const li = document.createElement("li");
+	const linkBtn = document.createElement("a");
+	const div = document.createElement("div");
+	// const vehicleId = vehicles_LS.length + 1;
+	linkBtn.innerText = "Move to JD Power";
+	linkBtn.href = `http://www.jdpower.com/cars/${obj.vehicleMake}/${obj.vehicleModel}/${obj.vehicleYear}`;
+	linkBtn.target = "_blank";
+
+	div.innerHTML = `
+		<label>Seller Name:</label> ${obj.sellerName} <br />
+		<label>Address:</label> ${obj.userAddress} <br />
+		<label>City:</label> ${obj.userCity} <br />
+		<label>Phone Number:</label> ${obj.userPhoneNumber} <br />
+		<label>Email:</label> ${obj.userEmail} <br />
+		<label>Vehicle Make:</label> ${obj.vehicleMake} <br />
+		<label>Vehicle Model:</label> ${obj.vehicleModel} <br />
+		<label>vehicle Year:</label> ${obj.vehicleYear} <br />
+	`;
+
+	li.appendChild(div);
+	li.appendChild(linkBtn);
+	// li.id = vehicleId;
+	ele.appendChild(li);
 };
