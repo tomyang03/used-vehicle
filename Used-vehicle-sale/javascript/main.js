@@ -6,75 +6,52 @@
  ----------------------------------------------------------------------------------*/
 
 /* ----------------------------------------------------------------------------------
-TODO: 
-    * TrimWhiteSpaceAndLetterConversion()
-    
 MAYBE:
     * Prevent duplicate entries? When all fields are the same as an exisiting entry
-    * Find better way to validate vehicle year?
-    * Confirm with user if they want to clear vehicle list?
  ----------------------------------------------------------------------------------*/
 const vehicleList = document.getElementById("vehicleList");
 const enteredVehicle = document.getElementById("enteredVehicle");
 
 const VEHICLES_LS = "vehicles"; // Local storage key
 
+const addressRegex = RegExp(/^[#.0-9a-zA-Z\s,-]+$/);
 const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 const phoneNumberRegex = RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+const yearRegex = RegExp(/^[0-9]+$/);
 let errorCount;
-
 
 // Form Validations --------------------------------------------------------------//
 function ValidateForm()
 {
 	// Get All Form Elements -----------------------------------------------------//
-	const sellerName = document.getElementById("sellerName").value;
-	const userAddress = document.getElementById("address").value;
-	const userCity = document.getElementById("city").value;
-	const userPhoneNumber = document.getElementById("phoneNumber").value;	
-	const userEmail = document.getElementById("email").value;	
-	const vehicleMake = document.getElementById("vehicleMake").value;
-	const vehicleModel = document.getElementById("vehicleModel").value;
-	const vehicleYear = document.getElementById("vehicleYear").value;
+	let sellerName = document.getElementById("sellerName").value;
+	let userAddress = document.getElementById("address").value;
+	let userCity = document.getElementById("city").value;
+	let userPhoneNumber = document.getElementById("phoneNumber").value;	
+	let userEmail = document.getElementById("email").value;	
+	let vehicleMake = document.getElementById("vehicleMake").value;
+	let vehicleModel = document.getElementById("vehicleModel").value;
+	let vehicleYear = document.getElementById("vehicleYear").value;
 	
 	errorCount = 0;
-	validateRequired(sellerName, "sellerName", "Seller Name");
-	validateRequired(userAddress, "address", "Address");
-	validateRequired(userCity, "city", "City");
-	validateRequired(userPhoneNumber, "phoneNumber", "Phone Number");
-	validateRequired(userEmail, "email", "Email");
-	validateRequired(vehicleMake, "vehicleMake", "Vehicle Make");
-	validateRequired(vehicleModel, "vehicleModel", "Vehicle Model");
-	validateRequired(vehicleYear, "vehicleYear", "Vehicle Year");
 
-	if (userPhoneNumber.length != 0 && !phoneNumberRegex.test(userPhoneNumber)) {
-		errorCount++;
-		document.getElementById("phoneNumber").classList.add("err-input");
-		document.getElementById("phoneNumberError").innerText = "Invalid phone number format";
-	}
-
-	if (userEmail.length != 0 && !emailRegex.test(userEmail)) {
-		errorCount++;
-		document.getElementById("email").classList.add("err-input");
-		document.getElementById("emailError").innerText = "Invalid email format";
-	}
-
-	/*
-	// TODO: Validate address format
-	// MAYBE: Find better way to dynamically validate vehicle year?
-	if (vehicleYear.length != 0 && vehicleYear < 1990)
-	{
-		errorMessage += "Vehicle model year too old.<br />";
-		document.getElementById("vehicleYear").focus();
-	}
-	if (vehicleYear > 2020)
-	{
-		errorMessage += "Vehicle model too new.<br />";
-		document.getElementById("vehicleYear").focus();
-	}	
-	*/
+	// Validate required field and format data (trim and capitalize first letter)
+	sellerName = validateRequired(sellerName, "sellerName", "Seller Name");
+	userAddress = validateRequired(userAddress, "address", "Address");
+	userCity = validateRequired(userCity, "city", "City");
+	userPhoneNumber = validateRequired(userPhoneNumber, "phoneNumber", "Phone Number");
+	userEmail = validateRequired(userEmail, "email", "Email");
+	vehicleMake = validateRequired(vehicleMake, "vehicleMake", "Vehicle Make");
+	vehicleModel = validateRequired(vehicleModel, "vehicleModel", "Vehicle Model");
+	vehicleYear = validateRequired(vehicleYear, "vehicleYear", "Vehicle Year");
 	
-	console.log(`errorCount: ${errorCount}`)
+	// Additional validation
+	validateAddress(userAddress, "address");
+	validatePhoneNumber(userPhoneNumber, "phoneNumber");
+	validateEmail(userEmail, "email");
+	userEmail = userEmail.toLowerCase(); 
+	validateYear(vehicleYear, "vehicleYear");
+
 	if (errorCount === 0)
 	{	
 		const vehicleObj = {
@@ -89,7 +66,7 @@ function ValidateForm()
 		}
 		let vehicles = JSON.parse(localStorage.getItem(VEHICLES_LS));
 		if (vehicles === null) {
-			vehicles = []
+			vehicles = [];
 		}
 		vehicles.push(vehicleObj);
 		localStorage.setItem(VEHICLES_LS, JSON.stringify(vehicles));
@@ -98,17 +75,10 @@ function ValidateForm()
 	}
 }
 
-// Trim White Space and Letter Case Conversions ---------------------------------//
-function TrimWhiteSpaceAndLetterConversion()
-{
-    // TODO: Trim any leading or trailing white spaces for all fields
-    // Capitalize the first letter of each input
-}
-
 function DisplayEnteredVehicle()
 {
-	let vehicles_LS = JSON.parse(localStorage.getItem(VEHICLES_LS));
-	const lastVehicle = vehicles_LS[vehicles_LS.length - 1];
+	let vehicles = JSON.parse(localStorage.getItem(VEHICLES_LS));
+	const lastVehicle = vehicles[vehicles.length - 1];
 	loadVehicle(lastVehicle, enteredVehicle);
 }
 
@@ -127,13 +97,20 @@ function DisplayVehicleList()
 
 function ClearLocalStorage()
 {
-	// MAYBE: Confirm with user if they want to clear vehicle list?
-	localStorage.clear();
-	location.reload();
+	let ok = confirm("Would you like to clean the list?");
+	if (ok) {
+		localStorage.removeItem(VEHICLES_LS);
+		location.reload();
+	}
+}
+
+const capitalizeFirstLetter = (str) => {
+	str = str.trim().toLowerCase();
+	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 const validateRequired = (value, id, label) => {
-	if (value.length === 0) {
+	if (value === "") {
 		errorCount++;
 		document.getElementById(id).classList.add("err-input");
 		document.getElementById(`${id}Error`).innerText = `${label} is required`;
@@ -144,6 +121,57 @@ const validateRequired = (value, id, label) => {
 	} else {
 		document.getElementById(id).classList.remove("err-input");
 		document.getElementById(`${id}Error`).innerText = "";
+		value = capitalizeFirstLetter(value);
+	}
+	return value;
+};
+
+const validateAddress = (address, id) => {
+	if (address !== "") {
+		if (!addressRegex.test(address)) {
+			errorCount++;
+			document.getElementById(id).classList.add("err-input");
+			document.getElementById(`${id}Error`).innerText = "Invalid address format";
+		}
+	}
+}
+
+const validatePhoneNumber = (phoneNumber, id) => {
+	if (phoneNumber !== "") {
+		if (!phoneNumberRegex.test(phoneNumber)) {
+			errorCount++;
+			document.getElementById(id).classList.add("err-input");
+			document.getElementById(`${id}Error`).innerText = "Invalid phone number format";
+		}
+	}
+}
+
+const validateEmail = (email, id) => {
+	if (email !== "") {
+		if (!emailRegex.test(email)) {
+			errorCount++;
+			document.getElementById(id).classList.add("err-input");
+			document.getElementById(`${id}Error`).innerText = "Invalid email format";
+		}
+	}
+};
+
+const validateYear = (year, id) => {
+	let currentYear = new Date().getFullYear();
+	if (year != "") {
+		if (!yearRegex.test(year)) {
+			errorCount++;
+			document.getElementById(id).classList.add("err-input");
+			document.getElementById(`${id}Error`).innerText = "Invalid year format";
+		} else if (year.length != 4) {
+			errorCount++;
+			document.getElementById(id).classList.add("err-input");
+			document.getElementById(`${id}Error`).innerText = "Invalid year format (yyyy)";
+		} else if (year < 1900 || year > currentYear) {
+			errorCount++;
+			document.getElementById(id).classList.add("err-input");
+			document.getElementById(`${id}Error`).innerText = "Vehicle year should be in range 1900 to current year.";
+		}
 	}
 };
 
@@ -151,10 +179,10 @@ const loadVehicle = (obj, ele) => {
 	const li = document.createElement("li");
 	const linkBtn = document.createElement("a");
 	const div = document.createElement("div");
-	// const vehicleId = vehicles_LS.length + 1;
-	linkBtn.innerText = "Move to JD Power";
+	linkBtn.innerText = "Move to J.D. Power";
 	linkBtn.href = `http://www.jdpower.com/cars/${obj.vehicleMake}/${obj.vehicleModel}/${obj.vehicleYear}`;
 	linkBtn.target = "_blank";
+	linkBtn.classList.add("btn-jd-power");
 
 	div.innerHTML = `
 		<label>Seller Name:</label> ${obj.sellerName} <br />
@@ -164,11 +192,10 @@ const loadVehicle = (obj, ele) => {
 		<label>Email:</label> ${obj.userEmail} <br />
 		<label>Vehicle Make:</label> ${obj.vehicleMake} <br />
 		<label>Vehicle Model:</label> ${obj.vehicleModel} <br />
-		<label>vehicle Year:</label> ${obj.vehicleYear} <br />
+		<label>Vehicle Year:</label> ${obj.vehicleYear} <br />
 	`;
 
 	li.appendChild(div);
 	li.appendChild(linkBtn);
-	// li.id = vehicleId;
 	ele.appendChild(li);
 };

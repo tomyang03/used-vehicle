@@ -10,8 +10,8 @@ Create the Used Vehicle Sale App to test using Selenium
 ---
 
 ## Youngyun's TO DO
-- Add detail validation **(Done for phone, email)**
+- :heavy_check_mark: Add detail validation **(Done for phone, email, year, simple address)**
 - :heavy_check_mark: Add links to external (JD Power)
 - :heavy_check_mark: Change data in Local Storage into JSON format
 - :heavy_check_mark: (If needs) Print each error message below for each input
-- Clear local storage
+- :heavy_check_mark: Clear local storage

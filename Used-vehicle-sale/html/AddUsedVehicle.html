@@ -22,7 +22,7 @@
 		<!--onfocusout for all fields calls TrimWhiteSpaceAndLetterConversion() 
 			function from main.js: capitalize first letter for consistency, and
 			trim leading or trailing whitespaces for testing -->
-			<fieldset id="formBorder" onfocusout="TrimWhiteSpaceAndLetterConversion();">	 
+			<fieldset id="formBorder">	 
 			
 				<div class="buttons">				
 					<input type="button" class="navigationBtns" value="Home Page" 
@@ -68,7 +68,7 @@
 				</section>
 				<section>
 					<label for="vehicleYear" class="label-add">Vehicle Year</label>
-					<input type="number" name="vehicleYear" id="vehicleYear" placeholder="Year of Vehicle Model">
+					<input type="text" name="vehicleYear" id="vehicleYear" placeholder="Year of Vehicle Model">
 					<div id="vehicleYearError" class="err-msg"></div>
 				</section>										
 				<!--add JS function that appends all validation/error messages to 
