@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+        "projectName": "Group2UsedVehicleSaleTestProject",
+        "projectPath": "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+        "packagesPath": "C:\\Users\\Denni\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Denni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.8.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.17.0, )"
+            },
+            "Selenium.Firefox.WebDriver": {
+              "target": "Package",
+              "version": "[0.27.0, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[3.141.0, )"
+            },
+            "nunit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
