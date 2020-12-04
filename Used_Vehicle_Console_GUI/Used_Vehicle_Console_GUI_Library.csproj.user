@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartAction>Program</StartAction>
-    <StartProgram>C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSaleTestProject\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe</StartProgram>
-    <StartArguments>Used_Vehicle_Console_GUI.dll  --wait --inprocess</StartArguments>
-    <StartWorkingDirectory>C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Used_Vehicle_Console_GUI\bin\Debug\</StartWorkingDirectory>
-  </PropertyGroup>
-</Project>

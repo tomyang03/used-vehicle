@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a2bAgP9fvurdFx0Ubx7l5mlHyHsuXM2I4dNI+Qxo7ZYWu38B4H2Zm7hv8trIsK03z03o2Y8rd4I0JMooZgNnoQ==",
+  "dgSpecHash": "x+vGSxbpwnO42n+7huqN+aGghxcD/8BPpgL1vB5ceP2ZGnMqWl7TKIGVF5+3jySOE8H7Znfw5F/jULv9AqZJFA==",
   "success": true,
-  "projectFilePath": "C:\\Kang\\SENG8040\\Project\\VehicleSalesProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+  "projectFilePath": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tomya\\.nuget\\packages\\microsoft.codecoverage\\16.8.0\\microsoft.codecoverage.16.8.0.nupkg.sha512",
     "C:\\Users\\tomya\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",

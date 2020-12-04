@@ -4580,11 +4580,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Kang\\SENG8040\\Project\\VehicleSalesProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+      "projectUniqueName": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
       "projectName": "Group2UsedVehicleSaleTestProject",
-      "projectPath": "C:\\Kang\\SENG8040\\Project\\VehicleSalesProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+      "projectPath": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
       "packagesPath": "C:\\Users\\tomya\\.nuget\\packages\\",
-      "outputPath": "C:\\Kang\\SENG8040\\Project\\VehicleSalesProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\obj\\",
+      "outputPath": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\tomya\\AppData\\Roaming\\NuGet\\NuGet.Config",
