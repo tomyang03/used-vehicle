@@ -49,10 +49,96 @@ namespace Group2UsedVehicleSaleTestProject
         }
 
         [Test]
+        public void InvalidPhoneNumber()
+        {
+            /* --------------------------------------------------------------------------
+           Test #1: Verify J.D. Power link redirects to the correct vehicle page
+               (1) Navigate to AddUsedVehicle page.
+               (2) Enter all required form fields with a phone number that is longer 
+                   than 10 digits  and click "Submit".
+               (3) Click on Submit button
+               (4) The form shows The Invalid Phone number as an error tag 
+                   for the phoneNumber field
+          ----------------------------------------------------------------------------*/
+
+            driver.Navigate().GoToUrl(addVehicleURL);
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133333");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            string phoneNumberError = driver.FindElement(By.Id("phoneNumberError")).Text;
+            Assert.AreEqual("Invalid phone number format", phoneNumberError);
+        }
+
+        [Test]
+        public void InvalidAddress()
+        {
+            /* --------------------------------------------------------------------------
+            Test #2: Verify J.D. Power link redirects to the correct vehicle page
+                (1) Navigate to AddUsedVehicle page.
+                (2) Enter all required form fields with a address that is only 1 character 
+                    than 10 digits  and click "Submit".
+                (3) Click on Submit button
+                (4) The form shows the error message Invalid format (Minimum 2 characters required)
+                    for the address field
+           ----------------------------------------------------------------------------*/
+
+            driver.Navigate().GoToUrl(addVehicleURL);
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("M");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            string addressError = driver.FindElement(By.Id("addressError")).Text;
+            Assert.AreEqual("Invalid format (Minimum 2 characters required)", addressError);
+        }
+
+
+        [Test]
+        public void InvalidEmail()
+        {
+            /* --------------------------------------------------------------------------
+            Test #3: Verify J.D. Power link redirects to the correct vehicle page
+                (1) Navigate to AddUsedVehicle page.
+                (2) Enter all required form fields with a address that is only 1 character 
+                    than 10 digits  and click "Submit".
+                (3) Click on Submit button
+                (4) The form shows the error message Invalid format (Minimum 2 characters required)
+                    for the address field
+           ----------------------------------------------------------------------------*/
+
+            driver.Navigate().GoToUrl(addVehicleURL);
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man at conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            string addressError = driver.FindElement(By.Id("emailError")).Text;
+            Assert.AreEqual("Invalid email format", addressError);
+        }
+
+
+        [Test]
         public void LoadAddVehiclePage_LeaveFieldsBlankAndSubmit_DisplayRequiredErrorsForAllFields()
         {
             /* --------------------------------------------------------------------------
-             Test #1: Verify the website requires all form fields be mandatory
+             Test #4: Verify the website requires all form fields be mandatory
                  (1) Navigate to AddUsedVehicle page.
                  (2) Leave all fields blank and click "Submit".
                  (3) Check if all fields are validated and their correct error
@@ -90,10 +176,45 @@ namespace Group2UsedVehicleSaleTestProject
         }
 
         [Test]
+        public void LoadAddVehiclePage_CompleteForm_VerifyFormDetailsUponSubmission()
+        {
+            /* --------------------------------------------------------------------------
+             Test #5: Verify that the details after submitting the page (actualFormOutputText) is equal to 
+                      exptectedFormOutput: The expected form result after clicking the submit button
+                 (1) Navigate to AddUsedVehicle page.
+                 (2) Enter all required form fields and click "Submit".
+                 (3) NUnit verifies that our exptectedFormOutput matches the
+                     actual Output (actualFormOutputText) that was generated after the user
+                     has entered all the fields correctly.                     
+            ----------------------------------------------------------------------------*/
+
+            driver.Navigate().GoToUrl(addVehicleURL);
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+
+            driver.FindElement(By.Id("submitBtn")).Click();
+            IWebElement FormOutput = driver.FindElement(By.XPath("//section[@id='enteredVehicle']/li/div"));
+            string actualFormOutputText = FormOutput.Text.Replace("\r\n", " ");
+            string expectedFormOutput = "Seller Name: Tony stark Address: 10880 malibu point City: Point dume Phone Number: (212)-970-4133 Email: iron-man@conestogac.on.ca Vehicle Make: Tesla-motors Vehicle Model: Model-s Vehicle Year: 2020";
+            Assert.AreEqual(expectedFormOutput, actualFormOutputText);
+        }
+
+
+         /* This test fails in the Nunit Console GUI, 
+         * I suspect that driver.Title is unable to get the title from the page,
+         * could this test be made optional, we need to look into this.
+         */
+        [Test]
         public void LoadAddVehiclePage_CompleteForm_GenerateCorrectJDPowerLinkForVehicle()
         {
             /* --------------------------------------------------------------------------
-             Test #2: Verify J.D. Power link redirects to the correct vehicle page
+             Test #7: Verify J.D. Power link redirects to the correct vehicle page
                  (1) Navigate to AddUsedVehicle page.
                  (2) Enter all required form fields and click "Submit".
                  (3) Click the genereated J.D. Power link and check if it redirects
@@ -124,65 +245,6 @@ namespace Group2UsedVehicleSaleTestProject
             Assert.AreEqual($"{vehicleYear} {vehicleMake} {vehicleModel} " +
                 $"Ratings, Pricing, Reviews and Awards | J.D. Power", driver.Title);
         }
-
-        [Test]
-        public void LoadPage_Action_Result3()
-        {
-            /* --------------------------------------------------------------------------
-             Test #: 
-                 (1) 
-                 (2) 
-                 (3) 
-            ----------------------------------------------------------------------------*/
-
-        }
-
-        [Test]
-        public void LoadPage_Action_Result4()
-        {
-            /* --------------------------------------------------------------------------
-             Test #: 
-                 (1) 
-                 (2) 
-                 (3) 
-            ----------------------------------------------------------------------------*/
-
-        }
-
-        [Test]
-        public void LoadPage_Action_Result5()
-        {
-            /* --------------------------------------------------------------------------
-             Test #: 
-                 (1) 
-                 (2) 
-                 (3) 
-            ----------------------------------------------------------------------------*/
-
-        }
-
-        [Test]
-        public void LoadPage_Action_Result6()
-        {
-            /* --------------------------------------------------------------------------
-             Test #: 
-                 (1) 
-                 (2) 
-                 (3) 
-            ----------------------------------------------------------------------------*/
-
-        }
-
-        [Test]
-        public void LoadPage_Action_Result7()
-        {
-            /* --------------------------------------------------------------------------
-             Test #: 
-                 (1) 
-                 (2) 
-                 (3) 
-            ----------------------------------------------------------------------------*/
-
-        }
+      
     }
 }
