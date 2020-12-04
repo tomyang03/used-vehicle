@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-run start-time="2020-12-04 23:17:42Z">
+  <command-line><![CDATA["C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSaleTestProject\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe" Group2UsedVehicleSale_GUI_TestProject.dll --wait --inprocess]]></command-line>
+</test-run>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,10 +13,10 @@ using OpenQA.Selenium.Support.UI;
  * Professor: Firouzeh Sharifi Lotfabad
  * Group 2: Dennis Nay, Kang Yang, Ruchika Shekhawat, Youngyun Namkung
 ---------------------------------------------------------------------------------------*/
-namespace Group2UsedVehicleSaleTestProject
+namespace Group2UsedVehicleSale_GUI_TestProject
 {
-
-    public class UsedVehicleSaleAppTests
+    [TestFixture]
+    public class UsedVehicleSaleApp_GUI_Tests
     {
         private IWebDriver driver;              // IWebDriver interface
         private string currentDirectory;        // path to current directory
@@ -28,12 +28,16 @@ namespace Group2UsedVehicleSaleTestProject
         {
             driver = new FirefoxDriver();
             driver.Manage().Window.Maximize();
-            //  currentDirectory: current assembly folder path, pointing to the assembly folder netcoreapi3.1
+            // Need to add this line or else Environment.CurrentDirectory will point to some funky workspace location
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             currentDirectory = Environment.CurrentDirectory;
-            // homeURL: The dynamic file location for the homepage  
-            homeURL = $"file:///{currentDirectory}../../../../../Used-vehicle-sale/Group2Home.html";
+            // removed an extra "../", before the assembly folder was netcoreapi3.1 for the Group2UsedVehicleSaleTestProject Project,
+            // now the assembly folder is pointing to bin/deubg for Group2UsedVehicleSale_GUI_TestProject Project
+
+            // homeURL: The dynamic file location for the homepage            
+            homeURL = $"file:///{currentDirectory}../../../../Used-vehicle-sale/Group2Home.html";
             // addVehicleURL: The dynamic file location for the website with the form to add vehicles
-            addVehicleURL = $"file:///{currentDirectory}../../../../../Used-vehicle-sale/html/AddUsedVehicle.html";
+            addVehicleURL = $"file:///{currentDirectory}../../../../Used-vehicle-sale/html/AddUsedVehicle.html";
         }
 
         [Test]
@@ -67,7 +71,7 @@ namespace Group2UsedVehicleSaleTestProject
                (4) The form shows The Invalid Phone number as an error tag 
                    for the phoneNumber field
           ----------------------------------------------------------------------------*/
-
+            
             // Let driver go to the website with the form that can be used to fill out the vehicle information
             driver.Navigate().GoToUrl(addVehicleURL);
             // Fill out the information in the form
@@ -226,7 +230,7 @@ namespace Group2UsedVehicleSaleTestProject
             driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
             driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
 
-
+            
             driver.FindElement(By.Id("submitBtn")).Click();
             // Get the text from div tag that displays the information entered by the user on the same page after form was submitted
             IWebElement FormOutput = driver.FindElement(By.XPath("//section[@id='enteredVehicle']/li/div"));
@@ -235,7 +239,7 @@ namespace Group2UsedVehicleSaleTestProject
             // Matches the actual form output (actualFormOutputText) that was generated after submission  
             // which shows that form submission successful and the correct information was displayed
             string expectedFormOutput = "Seller Name: Tony stark Address: 10880 malibu point City: Point dume Phone Number: (212)-970-4133 Email: iron-man@conestogac.on.ca Vehicle Make: Tesla-motors Vehicle Model: Model-s Vehicle Year: 2020";
-            string actualFormOutputText = FormOutput.Text.Replace("\r\n", " ");
+            string actualFormOutputText = FormOutput.Text.Replace("\r\n", " ");            
             Assert.AreEqual(expectedFormOutput, actualFormOutputText);
         }
 
