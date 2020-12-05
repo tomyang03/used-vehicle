@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj": {}
+    "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj": {
+    "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+        "projectUniqueName": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
         "projectName": "Group2UsedVehicleSaleTestProject",
-        "projectPath": "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
-        "packagesPath": "C:\\Users\\Denni\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Denni\\source\\repos\\SENG8040_repo\\Group2_SeleniumProject\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\obj\\",
+        "projectPath": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\Group2UsedVehicleSaleTestProject.csproj",
+        "packagesPath": "C:\\Users\\tomya\\.nuget\\packages\\",
+        "outputPath": "C:\\Kang\\SENG8040\\Project\\KangAutomationTest\\used-vehicle-sale\\Group2UsedVehicleSaleTestProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Denni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tomya\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
@@ -74,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

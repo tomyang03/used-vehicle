@@ -1,0 +1,12 @@
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\Group2UsedVehicleSale_GUI_TestProject.dll
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\Group2UsedVehicleSale_GUI_TestProject.pdb
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\nunit.framework.dll
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\WebDriver.dll
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\nunit.framework.pdb
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\nunit.framework.xml
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\WebDriver.xml
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.csproj.CoreCompileInputs.cache
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.csproj.CopyComplete
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.dll
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.pdb
+C:\Kang\SENG8040\Project\VehicleSalesProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.csprojAssemblyReference.cache
