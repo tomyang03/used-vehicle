@@ -34,7 +34,6 @@ function ValidateForm()
 	let vehicleYear = document.getElementById("vehicleYear").value;
 	
 	errorCount = 0;
-
 	// Validate required field and format data (trim and capitalize first letter)
 	sellerName = validateRequired(sellerName, "sellerName", "Seller Name");
 	userAddress = validateRequired(userAddress, "address", "Address");
@@ -110,6 +109,7 @@ const capitalizeFirstLetter = (str) => {
 }
 
 const validateRequired = (value, id, label) => {
+	value = capitalizeFirstLetter(value);
 	if (value === "") {
 		errorCount++;
 		document.getElementById(id).classList.add("err-input");
@@ -121,7 +121,7 @@ const validateRequired = (value, id, label) => {
 	} else {
 		document.getElementById(id).classList.remove("err-input");
 		document.getElementById(`${id}Error`).innerText = "";
-		value = capitalizeFirstLetter(value);
+		// value = capitalizeFirstLetter(value);
 	}
 	return value;
 };
@@ -134,7 +134,7 @@ const validateAddress = (address, id) => {
 			document.getElementById(`${id}Error`).innerText = "Invalid address format";
 		}
 	}
-}
+};
 
 const validatePhoneNumber = (phoneNumber, id) => {
 	if (phoneNumber !== "") {
@@ -144,7 +144,7 @@ const validatePhoneNumber = (phoneNumber, id) => {
 			document.getElementById(`${id}Error`).innerText = "Invalid phone number format";
 		}
 	}
-}
+};
 
 const validateEmail = (email, id) => {
 	if (email !== "") {
