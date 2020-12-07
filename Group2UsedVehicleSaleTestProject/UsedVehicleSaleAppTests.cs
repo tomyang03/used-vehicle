@@ -40,7 +40,7 @@ namespace Group2UsedVehicleSaleTestProject
         public void LoadHomePage_Wait10Seconds_CorrectTitleAppears()
         {
             /* --------------------------------------------------------------------------
-             Smoke Test: Verify the website opens in Firefox
+             UVS001: Application launches on Firefox and correct title appears
                  (1) Navigate to home page.
                  (2) Check if the correct title appears for up to 10 seconds.
                      If it does, the website successfully opened in Firefox.
@@ -48,125 +48,30 @@ namespace Group2UsedVehicleSaleTestProject
             ----------------------------------------------------------------------------*/
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            // Let driver navigaet to the homepage
+
+            // Let driver navigate to the homepage
             driver.Navigate().GoToUrl(homeURL);
-            // Make sure that the webpage contains the title "Group 2 - Used Vehicle Sale App"
-            // which proofs that the smoke test has passed within the timespan of 10 sec
+
+            // Validation: Check if webpage title says "Group 2 - Used Vehicle Sale App",
+            // which proves the test passed within the timespan of 10 seconds
             wait.Until(p => p.Title.Contains("Group 2 - Used Vehicle Sale App"));
         }
-
-        [Test]
-        public void InvalidPhoneNumber()
-        {
-            /* --------------------------------------------------------------------------
-           Test #1: Verify J.D. Power link redirects to the correct vehicle page
-               (1) Navigate to AddUsedVehicle page.
-               (2) Enter all required form fields with a phone number that is longer 
-                   than 10 digits  and click "Submit".
-               (3) Click on Submit button
-               (4) The form shows The Invalid Phone number as an error tag 
-                   for the phoneNumber field
-          ----------------------------------------------------------------------------*/
-
-            // Let driver go to the website with the form that can be used to fill out the vehicle information
-            driver.Navigate().GoToUrl(addVehicleURL);
-            // Fill out the information in the form
-            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
-            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
-            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
-            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133333");
-            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
-            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
-            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
-            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
-            driver.FindElement(By.Id("submitBtn")).Click();
-            // Get the text from the div tag phoneNumberError that was generated after submitBtn was clicked 
-            string phoneNumberError = driver.FindElement(By.Id("phoneNumberError")).Text;
-            // Make sure that phoneNumberError holds the error message  "Invalid phone number format"
-            // which proofs that an invalid phoneNumber was entered
-            Assert.AreEqual("Invalid phone number format", phoneNumberError);
-        }
-
-        [Test]
-        public void InvalidAddress()
-        {
-            /* --------------------------------------------------------------------------
-            Test #2: Verify J.D. Power link redirects to the correct vehicle page
-                (1) Navigate to AddUsedVehicle page.
-                (2) Enter all required form fields with a address that is only 1 character 
-                    long and click "Submit".
-                (3) Click on Submit button
-                (4) The form shows the error message Invalid format (Minimum 2 characters required)
-                    for the address field
-           ----------------------------------------------------------------------------*/
-
-            // Let driver go to the website with the form that can be used to fill out the vehicle information
-            driver.Navigate().GoToUrl(addVehicleURL);
-            // Fill out the information in the form
-            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
-            driver.FindElement(By.Id("address")).SendKeys("M");
-            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
-            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
-            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
-            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
-            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
-            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
-            driver.FindElement(By.Id("submitBtn")).Click();
-            // Get the text from the div tag addressError that was generated after submitBtn was clicked
-            string addressError = driver.FindElement(By.Id("addressError")).Text;
-            // Make sure that addressError holds the error message  "Invalid phone number format"
-            // which proofs that an invalid address was entered
-            Assert.AreEqual("Invalid format (Minimum 2 characters required)", addressError);
-        }
-
-
-        [Test]
-        public void InvalidEmail()
-        {
-            /* --------------------------------------------------------------------------
-            Test #3: Verify J.D. Power link redirects to the correct vehicle page
-                (1) Navigate to AddUsedVehicle page.
-                (2) Enter all required form fields with an email address that does not have the @
-                    symbol and click "Submit".
-                (3) Click on Submit button
-                (4) The form shows the error message Invalid email format 
-                    for email field
-           ----------------------------------------------------------------------------*/
-
-            // Let driver go to the website with the form that can be used to fill out the vehicle information
-            driver.Navigate().GoToUrl(addVehicleURL);
-            // Fill out the information in the form
-            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
-            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
-            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
-            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
-            driver.FindElement(By.Id("email")).SendKeys("iron-man at conestogac.on.ca");
-            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
-            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
-            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
-            driver.FindElement(By.Id("submitBtn")).Click();
-            // Get the text from the div tag emailError that was generated after submitBtn was clicked
-            string addressError = driver.FindElement(By.Id("emailError")).Text;
-            // Make sure that addressError holds the error message  "Invalid email format"
-            // which proofs that an invalid email was entered
-            Assert.AreEqual("Invalid email format", addressError);
-        }
-
 
         [Test]
         public void LoadAddVehiclePage_LeaveFieldsBlankAndSubmit_DisplayRequiredErrorsForAllFields()
         {
             /* --------------------------------------------------------------------------
-             Test #4: Verify the website requires all form fields be mandatory
+             UVS002: Application requires all form fields be mandatory
                  (1) Navigate to AddUsedVehicle page.
                  (2) Leave all fields blank and click "Submit".
                  (3) Check if all fields are validated and their correct error
                      messages are displayed.
             ----------------------------------------------------------------------------*/
 
-            // Let driver go to the website with the form that can be used to fill out the vehicle information
+            // Let driver navigate to AddUsedVehicle page
             driver.Navigate().GoToUrl(addVehicleURL);
-            // Fill out the information in the form with empty field values
+
+            // Enter empty field values (i.e. leave all form fields blank) then submit
             driver.FindElement(By.Id("sellerName")).SendKeys("");
             driver.FindElement(By.Id("address")).SendKeys("");
             driver.FindElement(By.Id("city")).SendKeys("");
@@ -177,7 +82,7 @@ namespace Group2UsedVehicleSaleTestProject
             driver.FindElement(By.Id("vehicleYear")).SendKeys("");
             driver.FindElement(By.Id("submitBtn")).Click();
 
-            // Get the text from error div tags that were generated after the form was submitted
+            // Get the text from error div tags generated after the form was submitted
             string sellerNameError = driver.FindElement(By.Id("sellerNameError")).Text;
             string addressError = driver.FindElement(By.Id("addressError")).Text;
             string cityError = driver.FindElement(By.Id("cityError")).Text;
@@ -187,9 +92,9 @@ namespace Group2UsedVehicleSaleTestProject
             string vehicleModelError = driver.FindElement(By.Id("vehicleModelError")).Text;
             string vehicleYearError = driver.FindElement(By.Id("vehicleYearError")).Text;
 
-            // Validation: Make sure that erorr div tags hold the corresponding erorr messages
-            // such as "Seller Name is required" etc.  which shows that form submission was not successful
-            // because none of the fields were not filled out 
+            // Validation: Check if error div tags hold the corresponding error messages,
+            // such as "Seller Name is required", etc. which proves the form submission 
+            // was not successful because all the fields were left blank 
             Assert.AreEqual("Seller Name is required", sellerNameError);
             Assert.AreEqual("Address is required", addressError);
             Assert.AreEqual("City is required", cityError);
@@ -200,23 +105,122 @@ namespace Group2UsedVehicleSaleTestProject
             Assert.AreEqual("Vehicle Year is required", vehicleYearError);
         }
 
+        [Test]
+        public void LoadAddVehiclePage_EnterInvalidAddress_DisplayInvalidAddressError()
+        {
+            /* --------------------------------------------------------------------------
+             UVS003: Application validates correct address format
+                (1) Navigate to AddUsedVehicle page.
+                (2) Enter all required form fields with an address that is only 
+                    one character long and click "Submit".
+                (3) Check if the form displays an invalid address error message.
+           ----------------------------------------------------------------------------*/
+
+            // Let driver navigate to AddUsedVehicle page
+            driver.Navigate().GoToUrl(addVehicleURL);
+
+            // Fill out the the form with an invalid address then submit
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("M");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            // Get text from addressError div tag generated after submitting the form
+            string addressError = driver.FindElement(By.Id("addressError")).Text;
+
+            // Validation: check if addressError holds the error message, 
+            // "Invalid phone number format", which proves an invalid address was entered
+            Assert.AreEqual("Invalid format (Minimum 2 characters required)", addressError);
+        }
+
+        [Test]
+        public void LoadAddVehiclePage_EnterInvalidPhoneNumber_DisplayInvalidPhoneNumberError()
+        {
+            /* --------------------------------------------------------------------------
+             UVS004: Application validates correct phone number format
+               (1) Navigate to AddUsedVehicle page.
+               (2) Enter all required form fields with a phone number shorter 
+                   than 10 digits and click "Submit".
+               (3) Check if the form displays an invalid phone number error message.
+          ----------------------------------------------------------------------------*/
+
+            // Let driver navigate to AddUsedVehicle page
+            driver.Navigate().GoToUrl(addVehicleURL);
+
+            // Fill out the form with an invalid phone number then submit
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("519-123-456");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            // Get text from phoneNumberError div tag generated after submitting the form 
+            string phoneNumberError = driver.FindElement(By.Id("phoneNumberError")).Text;
+
+            // Validation: check if phoneNumberError holds the error message, 
+            // "Invalid phone number format", which proves an invalid phone number was entered
+            Assert.AreEqual("Invalid phone number format", phoneNumberError);
+        }
+
+        [Test]
+        public void LoadAddVehiclePage_EnterInvalidEmail_DisplayInvalidEmailError()
+        {
+            /* --------------------------------------------------------------------------
+             UVS005: Application validates correct email format
+                (1) Navigate to AddUsedVehicle page.
+                (2) Enter all required form fields with an email address that does not 
+                    have the "@" symbol and click "Submit".
+                (3) Check if the form displays an invalid email error message.
+           ----------------------------------------------------------------------------*/
+
+            // Let driver navigate to AddUsedVehicle page
+            driver.Navigate().GoToUrl(addVehicleURL);
+
+            // Fill out the form with an invalid email then submit
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
+            driver.FindElement(By.Id("email")).SendKeys("iron-manatconestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            // Get text from emailError div tag generated after submitting the form
+            string emailError = driver.FindElement(By.Id("emailError")).Text;
+
+            // Validation: check if emailError holds the error message, 
+            // "Invalid email format", which proves an invalid email was entered
+            Assert.AreEqual("Invalid email format", emailError);
+        }
 
         [Test]
         public void LoadAddVehiclePage_CompleteForm_VerifyFormDetailsUponSubmission()
         {
             /* --------------------------------------------------------------------------
-             Test #5: Verify that the details after submitting the page (actualFormOutputText) is equal to 
-                      exptectedFormOutput: The expected form result after clicking the submit button
+             UVS007: Application displays correct contact and 
+                     vehicle information after the form is submitted
+                 
                  (1) Navigate to AddUsedVehicle page.
                  (2) Enter all required form fields and click "Submit".
-                 (3) NUnit verifies that our exptectedFormOutput matches the
-                     actual Output (actualFormOutputText) that was generated after the user
-                     has entered all the fields correctly.                     
+                 (3) Check if the correct contact and vehicle information is
+                     displayed on the next page.
             ----------------------------------------------------------------------------*/
 
-            // Let driver go to the website with the form that can be used to fill out the vehicle information
+            // Let driver navigate to AddUsedVehicle page
             driver.Navigate().GoToUrl(addVehicleURL);
-            // Fill out the information in the form with correct field values
+
+            // Fill out the form with valid field values then submit
             driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
             driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
             driver.FindElement(By.Id("city")).SendKeys("Point Dume");
@@ -225,37 +229,42 @@ namespace Group2UsedVehicleSaleTestProject
             driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
             driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
             driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
-
-
             driver.FindElement(By.Id("submitBtn")).Click();
-            // Get the text from div tag that displays the information entered by the user on the same page after form was submitted
-            IWebElement FormOutput = driver.FindElement(By.XPath("//section[@id='enteredVehicle']/li/div"));
 
-            // Make sure that expectedFormOutput (a message that should be displayed once the form is submitted)
-            // Matches the actual form output (actualFormOutputText) that was generated after submission  
-            // which shows that form submission successful and the correct information was displayed
-            string expectedFormOutput = "Seller Name: Tony stark Address: 10880 malibu point City: Point dume Phone Number: (212)-970-4133 Email: iron-man@conestogac.on.ca Vehicle Make: Tesla-motors Vehicle Model: Model-s Vehicle Year: 2020";
+            // After submitting the form, get text from div tag that displays the 
+            // previously entered contact and vehicle information
+            IWebElement FormOutput = driver.FindElement
+                (By.XPath("//section[@id='enteredVehicle']/li/div"));
+
+            // Validation: check if expectedFormOutput (contains submission details)
+            // matches the actualFormOutputText generated afer submitting the form,  
+            // which proves the form was submitted successfully and the correct
+            // information is displayed on the next page
+            string expectedFormOutput =
+                "Seller Name: Tony stark Address: 10880 malibu point City: Point " +
+                    "dume Phone Number: (212)-970-4133 Email: iron-man@conestogac.on.ca " +
+                        "Vehicle Make: Tesla-motors Vehicle Model: Model-s Vehicle Year: 2020";
             string actualFormOutputText = FormOutput.Text.Replace("\r\n", " ");
             Assert.AreEqual(expectedFormOutput, actualFormOutputText);
         }
 
-
-        /* This test fails in the Nunit Console GUI, 
-         * I suspect that driver.Title is unable to get the title from the page,
-         * could this test be made optional, we need to look into this.
-         */
         [Test]
-        public void LoadAddVehiclePage_CompleteForm_GenerateCorrectJDPowerLinkForVehicle()
+        public void LoadAddVehiclePage_CompleteForm_DisplayEntryInCurrentVehicleListing()
         {
             /* --------------------------------------------------------------------------
-             Test #2: Verify J.D. Power link redirects to the correct vehicle page
-                 (1) Navigate to AddUsedVehicle page.
-                 (2) Enter all required form fields and click "Submit".
-                 (3) Click the genereated J.D. Power link and check if it redirects
-                     to the correct J.D. Power page for that specific vehicle.
-            ----------------------------------------------------------------------------*/
+             UVS008: Application correctly displays a list of previously 
+                     saved vehicles and their details
 
+                (1) Navigate to AddUsedVehicle page.
+                (2) Enter all required form fields and click "Submit".
+                (3) Navigate to CurrentVehicleListing page.
+                (4) Check if the previously submitted vehicle info is saved to the list.
+           ----------------------------------------------------------------------------*/
+
+            // Let driver navigate to AddUsedVehicle page
             driver.Navigate().GoToUrl(addVehicleURL);
+
+            // Fill out the form with valid field values
             driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
             driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
             driver.FindElement(By.Id("city")).SendKeys("Point Dume");
@@ -265,6 +274,50 @@ namespace Group2UsedVehicleSaleTestProject
             driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
             driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
 
+            // Click submit then navigate to the current vehicle listing
+            driver.FindElement(By.Id("submitBtn")).Click();
+            driver.FindElement(By.Id("homePageBtn")).Click();
+            driver.FindElement(By.Id("viewBtn")).Click();
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(p => p.Title.Contains("Current Vehicle Listing"));
+
+            // Validation: check if the current vehicle listing is empty. If it's not,
+            // then the application successfully saved the vehicle information.
+            string vehicleList = driver.FindElement(By.Id("vehicleList")).Text;
+            Assert.IsNotEmpty(vehicleList);
+        }
+
+        [Test]
+        public void LoadAddVehiclePage_CompleteForm_GenerateCorrectJDPowerLinkForVehicle()
+        {
+            /* --------------------------------------------------------------------------
+             UVS009: Application generates correct J.D. Power link for each specific 
+                     vehicle added and redirects to the appropriate J.D. Power page
+                 
+                 (1) Navigate to AddUsedVehicle page.
+                 (2) Enter all required form fields and click "Submit".
+                 (3) Click the genereated J.D. Power link.
+                 (4) Check for up to 10 seconds if it redirects to the
+                     correct J.D. Power page for that specific vehicle.
+            ----------------------------------------------------------------------------*/
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+            // Let driver navigate to AddUsedVehicle page
+            driver.Navigate().GoToUrl(addVehicleURL);
+
+            // Fill out the form with valid field values
+            driver.FindElement(By.Id("sellerName")).SendKeys("Tony Stark");
+            driver.FindElement(By.Id("address")).SendKeys("10880 Malibu Point");
+            driver.FindElement(By.Id("city")).SendKeys("Point Dume");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("(212)-970-4133");
+            driver.FindElement(By.Id("email")).SendKeys("iron-man@conestogac.on.ca");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("Tesla-Motors");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("Model-S");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("2020");
+
+            // Get the input text for vehicle make/model/year (replace any "-" with " ")
             string vehicleMake = Regex.Replace(driver.FindElement
                 (By.Id("vehicleMake")).GetAttribute("value"), @"[-]+", " ");
             string vehicleModel = Regex.Replace(driver.FindElement
@@ -272,14 +325,19 @@ namespace Group2UsedVehicleSaleTestProject
             string vehicleYear = Regex.Replace(driver.FindElement
                 (By.Id("vehicleYear")).GetAttribute("value"), @"[-]+", " ");
 
+            // Submit the form and click the J.D. Power link generated
             driver.FindElement(By.Id("submitBtn")).Click();
             driver.FindElement(By.ClassName("btn-jd-power")).Click();
             driver.SwitchTo().Window(driver.WindowHandles.Last());
 
+            // Validation: check for up to 10 sec if title of J.D. Power page matches
+            // the vehicle make/model/year previously entered, which proves the link
+            // redirects to the correct J.D. Power page for the specific vehicle
+            wait.Until(p => p.Title.Contains($"{vehicleYear} {vehicleMake} {vehicleModel} " +
+                $"Ratings, Pricing, Reviews and Awards | J.D. Power"));
 
-
-            Assert.AreEqual($"{vehicleYear} {vehicleMake} {vehicleModel} " +
-                $"Ratings, Pricing, Reviews and Awards | J.D. Power", driver.Title);
+            // If the test times out after 10 seconds or the title doesn't match, 
+            // then the test fails.
         }
     }
 }
