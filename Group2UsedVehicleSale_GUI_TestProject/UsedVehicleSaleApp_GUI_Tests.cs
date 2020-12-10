@@ -346,5 +346,53 @@ namespace Group2UsedVehicleSale_GUI_TestProject
             // If the test times out after 10 seconds or the title doesn't match, 
             // then the test fails.
         }
+
+        [Test]
+        public void LoadAddVehiclePage_TypeFieldsSpaceAndSubmit_DisplayRequiredErrorsForAllFields()
+        {
+            /* --------------------------------------------------------------------------
+             UVS010: Application requires all form fields be mandatory
+                 (1) Navigate to AddUsedVehicle page.
+                 (2) Type all fields spaces and click "Submit".
+                 (3) Check if all fields are validated and their correct error
+                     messages are displayed.
+            ----------------------------------------------------------------------------*/
+
+            // Let driver navigate to AddUsedVehicle page
+            driver.Navigate().GoToUrl(addVehicleURL);
+
+            // Enter empty field values (i.e. leave all form fields space) then submit
+            driver.FindElement(By.Id("sellerName")).SendKeys("    ");
+            driver.FindElement(By.Id("address")).SendKeys("  ");
+            driver.FindElement(By.Id("city")).SendKeys("   ");
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("   ");
+            driver.FindElement(By.Id("email")).SendKeys("   ");
+            driver.FindElement(By.Id("vehicleMake")).SendKeys("     ");
+            driver.FindElement(By.Id("vehicleModel")).SendKeys("    ");
+            driver.FindElement(By.Id("vehicleYear")).SendKeys("    ");
+            driver.FindElement(By.Id("submitBtn")).Click();
+
+            // Get the text from error div tags generated after the form was submitted
+            string sellerNameError = driver.FindElement(By.Id("sellerNameError")).Text;
+            string addressError = driver.FindElement(By.Id("addressError")).Text;
+            string cityError = driver.FindElement(By.Id("cityError")).Text;
+            string phoneNumberError = driver.FindElement(By.Id("phoneNumberError")).Text;
+            string emailError = driver.FindElement(By.Id("emailError")).Text;
+            string vehicleMakeError = driver.FindElement(By.Id("vehicleMakeError")).Text;
+            string vehicleModelError = driver.FindElement(By.Id("vehicleModelError")).Text;
+            string vehicleYearError = driver.FindElement(By.Id("vehicleYearError")).Text;
+
+            // Validation: Check if error div tags hold the corresponding error messages,
+            // such as "Seller Name is required", etc. which proves the form submission 
+            // was not successful because all the fields were left blank 
+            Assert.AreEqual("Seller Name is required", sellerNameError);
+            Assert.AreEqual("Address is required", addressError);
+            Assert.AreEqual("City is required", cityError);
+            Assert.AreEqual("Phone Number is required", phoneNumberError);
+            Assert.AreEqual("Email is required", emailError);
+            Assert.AreEqual("Vehicle Make is required", vehicleMakeError);
+            Assert.AreEqual("Vehicle Model is required", vehicleModelError);
+            Assert.AreEqual("Vehicle Year is required", vehicleYearError);            
+        }
     }
 }
