@@ -17,7 +17,6 @@ C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sa
 C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\nunit.framework.pdb
 C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\nunit.framework.xml
 C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\bin\Debug\WebDriver.xml
-C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.csprojAssemblyReference.cache
 C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.csproj.CoreCompileInputs.cache
 C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.csproj.CopyComplete
 C:\Users\Denni\source\repos\SENG8040_repo\Group2_SeleniumProject\used-vehicle-sale\Group2UsedVehicleSale_GUI_TestProject\obj\Debug\Group2UsedVehicleSale_GUI_TestProject.dll
